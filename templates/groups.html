@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+<h1>Select Your Group</h1>
+<br>
+
+<div style="display: flex; justify-content: center; ">
+    {% for i in all_groups %}
+    <a href="{{ url_for('bills', group_id=i.group_id)}}" style="text-decoration: none">
+        <div class="box"
+             style="padding:10px; border: 2px solid blue; width:120px; height:120px; margin:25px; text-align:center;border-radius: 50px 20px;">
+            <p
+                    style="font-size:20px;">ID:{{i.group_id}}</p>
+            <p style="font-size:15px;">{{i.description}}
+            <p/></div>
+    </a>
+    {% endfor %}
+</div>
+
+<br>
+<h4>Add group</h4>
+<br>
+<form method="post" action="#" style="">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.group_id.label(class="form-control-label") }}
+        {{ form.group_id(class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form.description.label(class="form-control-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    <br>
+    {{ form.submit }}
+</form>
+<br>
+
+{% endblock %}
