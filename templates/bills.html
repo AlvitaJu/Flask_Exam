@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+
+<h1>Group's bills:</h1>
+<br>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Description</th>
+        <th scope="col">Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for item in all_bills %}
+    <tr>
+        <th scope="row">{{ item.id }}</th>
+        <th scope="row">{{ item.description }}</th>
+        <th scope="row">{{ item.amount }}</th>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+</table>
+<br>
+<br>
+<h4>Add bill</h4>
+<br>
+<form method="POST" action="#">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.amount.label(class="form-control-label") }}
+        {{ form.amount(class="form-control") }}
+    </div>
+    <br>
+    <div class="form-group">
+        {{ form.description.label(class="form-control-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    <br>
+      {{ form.submit }}
+</form>
+<br>
+
+{% endblock %}
